@@ -48,7 +48,6 @@
       };
     in
     {
-      # here the hostname is being set to "reservoir" but you can change that to your needs
       # it is important that you use darwin.lib.darwinSystem as this is the builder that allow
       # for the configuration of the darwin system
       darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
