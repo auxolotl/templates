@@ -13,7 +13,7 @@
           "aarch64-linux"
           "x86_64-darwin"
           "aarch64-darwin"
-        ] (system: function system);
+        ] (system: function nixpkgs.legacyPackages.${system});
     in
     {
       templates = {
@@ -31,6 +31,6 @@
           description = "";
         };
       };
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
     };
 }
