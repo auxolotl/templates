@@ -44,34 +44,52 @@
 
       # the specialArgs are used to pass the inputs to the system configuration and home-manager configuration
       specialArgs = {
-        inherit inputs username hostname;
+        inherit inputs;
       };
     in
     {
       # it is important that you use darwin.lib.darwinSystem as this is the builder that allow
       # for the configuration of the darwin system
       darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
+        inherit system;
 
         # The specialArgs are used to pass the inputs to the system configuration
         inherit specialArgs;
 
         modules = [
+          ./core.nix
           ./homebrew.nix
-          ./users.nix
+          ./system.nix
 
           # The home-manager module is used to configure home-manager
           # to read more about this please see ../home-manager
           home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+          (
+            { config, ... }:
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-            # extraSpecialArgs is used to pass the inputs to the home-manager configuration
-            home-manager.extraSpecialArgs = specialArgs;
+              # extraSpecialArgs is used to pass the inputs to the home-manager configuration
+              home-manager.extraSpecialArgs = specialArgs;
 
-            # Here we have assume that the use is called "axel" but you can change that to your needs
-            home-manager.users.${username} = import ./home.nix;
-          }
+              # Here we can create our user
+              uses.users.${username} = {
+                home = "/Users/${username}";
+              };
+
+              # And a home-manager configuration for them
+              home-manager.users.${username} = {
+                imports = [ ./home.nix ];
+
+                home.username = username;
+              };
+
+              # Here we set our (networking) host name and computer name. They should usually be the same
+              networking.hostName = hostname;
+              networking.computerName = config.networking.hostName;
+            }
+          )
         ];
       };
     };
