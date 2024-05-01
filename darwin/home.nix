@@ -3,7 +3,7 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-    # rember we set this in our flake.nix file
+    # remember we set this in our flake.nix file
     username = username;
     homeDirectory = "/Users/${username}";
 

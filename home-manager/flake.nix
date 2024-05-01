@@ -9,7 +9,7 @@
 
       # The `follows` keyword in inputs is used for inheritance.
       # we do this in order to prevent duplication of the nixpkgs input, and potential
-      # issues with diffrent versions of given packages.
+      # issues with different versions of given packages.
       # However, it should be noted that this can lead to having to rebuild packages from source.
       inputs.nixpkgs.follows = "nixpkgs";
     };
