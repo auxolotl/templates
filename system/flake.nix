@@ -4,7 +4,7 @@
   inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
 
   outputs =
-    { nixpkgs, ... }:
+    { nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
