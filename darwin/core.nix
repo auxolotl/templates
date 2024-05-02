@@ -13,7 +13,7 @@
     # this allows the system builder to use substitutes
     builders-use-substitutes = true;
 
-    # we want these beacuse we don't have to build every package from source
+    # we want these because we don't have to build every package from source
     substituters = [ "https://nix-community.cachix.org" ];
     trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
 
