@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "resevoir": {
+    "nixpkgs": {
       "locked": {
         "lastModified": 1714562304,
         "narHash": "sha256-Mr3U37Rh6tH0FbaDFu0aZDwk9mPAe7ASaqDOGgLqqLU=",
@@ -18,7 +18,7 @@
     },
     "root": {
       "inputs": {
-        "resevoir": "resevoir"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
