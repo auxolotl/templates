@@ -1,7 +1,7 @@
 {
   description = "A simple system flake using some Aux defaults";
 
-  inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixos-unstable";
 
   outputs =
     inputs@{ nixpkgs, ... }:
