@@ -30,6 +30,10 @@
           path = ./darwin;
           description = "";
         };
+        direnv = {
+          path = ./direnv;
+          description = "An empty devshell with direnv support";
+        };
       };
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
     };
