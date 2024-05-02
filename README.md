@@ -1,13 +1,17 @@
-<a href="https://forum.aux.computer/c/special-interest-groups/sig-documentation/21">
-<img src="https://img.shields.io/static/v1?label=Maintained%20By&message=SIG%20Documentation&style=for-the-badge&labelColor=222222&color=794AFF" >
-</a>
-<a href="https://forum.aux.computer/c/special-interest-groups/sig-core/14">
-<img src="https://img.shields.io/static/v1?label=Maintained%20By&message=SIG%20Core&style=for-the-badge&labelColor=222222&color=794AFF" >
-</a>
+<p align="center">
+  <h2 align="center">Welcome to Aux</h2>
+</p>
 
-## Welcome to Aux
+<p align="center">
+	This is a template repository for getting started with your brand new FreshwaterOS system.
+</p>
 
-This is a template repository for getting started with your brand new FreshwaterOS system.
+<p align="center">
+  <a href="https://forum.aux.computer/c/special-interest-groups/sig-documentation/21"><img src="https://img.shields.io/static/v1?label=Maintained%20By&message=SIG%20Documentation&style=for-the-badge&labelColor=222222&color=794AFF" /></a>
+  <a href="https://forum.aux.computer/c/special-interest-groups/sig-core/14"><img src="https://img.shields.io/static/v1?label=Maintained%20By&message=SIG%20Core&style=for-the-badge&labelColor=222222&color=794AFF" /></a>
+</p>
+
+&nbsp;
 
 ### Getting Started
 
