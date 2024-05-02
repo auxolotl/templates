@@ -1,4 +1,4 @@
-{
+{username, ...}: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
@@ -17,8 +17,8 @@
     substituters = [ "https://nix-community.cachix.org" ];
     trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
 
-    # We also want to add our user, in this case "axel" to the trusted users
-    # this is important so that we can use the substituters with no issues
-    trusted-users = [ "axel" ];
+    # We also want to add our user, to the trusted users this is important so
+    # that we can use the substituters with no issues
+    trusted-users = [ username ];
   };
 }

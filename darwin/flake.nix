@@ -43,8 +43,9 @@
       hostname = builtins.abort "You need to fill in your hostname"; # Set this variable equal to your hostname
 
       # the specialArgs are used to pass the inputs to the system configuration and home-manager configuration
+      # in this example we use username on the file ./core.nix to have this argument available the module.
       specialArgs = {
-        inherit inputs;
+        inherit inputs username;
       };
     in
     {
