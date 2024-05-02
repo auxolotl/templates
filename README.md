@@ -18,16 +18,16 @@ There are 3 main templates in this repository:
 1. Run `nix flake new -t github:auxolotl/templates#darwin NixFiles` in the terminal. This will setup the basic configuration for the system, this generate a configuration for you from the files located in the `darwin` directory.
 2. The next step is to go into the `NixFiles` directory this can be achieved by running `cd NixFiles`.
 3. Now we you need to read over the configuration files and make any changes that you see fit, some of these must include changing your username and hostname.
-4. You now must rebuild this configuration we can do this with `nix run darwin-rebuild -- switch --flake .#hostname` hostname should be subsituted for your systems hostname.
+4. You now must rebuild this configuration we can do this with `nix run darwin -- switch --flake .#hostname` hostname should be substituted for your systems hostname.
 5. After your first run you are now able to use the `darwin-rebuild switch --flake .` command to rebuild your system.
 
-#### With Linux
+#### With NixOS
 
 1. Run `nix flake new -t github:auxolotyl/templates#system NixFiles`
 2. Move into your new system with `cd NixFiles`
-3. Fill in your `hostName` and `username` in `flake.nix`
+3. Fill in your `hostName` in `flake.nix`
 4. Run `nixos-generate-config --show-hardware-config > hardware-configuration.nix` to generate configuration based on your filesystems and drivers
-5. Run `sudo nixos-rebuild build --flake .#hostName`, replacing hostName with your new hostName
+5. Run `nixos-rebuild build --flake .#hostName`, replacing hostName with your new hostName
 
 Congratulations, you are now using Aux!
 

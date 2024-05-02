@@ -2,6 +2,9 @@
 # see <https://daiderd.com/nix-darwin/manual/index.html#sec-options> for more options
 {
   system = {
+    # remember to set the hostname in the kernel command line
+    defaults.smb.NetBIOSName = config.networking.hostName;
+
     # Add ability to used TouchID for sudo authentication
     security.pam.enableSudoTouchIdAuth = true;
 
