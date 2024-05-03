@@ -17,7 +17,7 @@
     in
     {
       devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShell {
+        default = pkgs.mkShellNoCC {
           packages = [ pkgs.hello ];
           IN_SHELL = "yes!";
         };
