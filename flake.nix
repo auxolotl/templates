@@ -17,7 +17,7 @@
     in
     {
       templates = {
-        default = self.templates.direnv;
+        default = self.templates.system;
         system = {
           path = ./system;
           description = "";
@@ -29,6 +29,10 @@
         darwin = {
           path = ./darwin;
           description = "";
+        };
+        direnv = {
+          path = ./direnv;
+          description = "An empty devshell with direnv support";
         };
       };
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
