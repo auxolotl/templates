@@ -17,7 +17,7 @@
     in
     {
       templates = {
-        default = self.templates.direnv;
+        default = self.templates.system;
         system = {
           path = ./system;
           description = "";
