@@ -6,10 +6,18 @@
   outputs =
     { nixpkgs, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ] (system: function nixpkgs.legacyPackages.${system});
     in
     {
-      devShells.${system}.default = pkgs.mkShell { packages = [ pkgs.hello ]; };
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell { packages = [ pkgs.hello ]; };
+      });
     };
 }
