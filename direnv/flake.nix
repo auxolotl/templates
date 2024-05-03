@@ -19,7 +19,10 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [ pkgs.hello ];
-          IN_SHELL = "yes!";
+          EXAMPLE_VAR = "inside the direnv template";
+          shellHook = ''
+            echo "Hello from $EXAMPLE_VAR, $(whoami)!"
+          '';
         };
       });
     };
