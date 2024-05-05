@@ -1,4 +1,4 @@
-{config, ...}:
+{ config, ... }:
 # This section apply settings to the system configuration only available on macOS
 # see <https://daiderd.com/nix-darwin/manual/index.html#sec-options> for more options
 {
