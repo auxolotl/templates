@@ -67,22 +67,23 @@
           (
             { config, ... }:
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
 
-              # extraSpecialArgs is used to pass the inputs to the home-manager configuration
-              home-manager.extraSpecialArgs = specialArgs;
+                # extraSpecialArgs is used to pass the inputs to the home-manager configuration
+                extraSpecialArgs = specialArgs;
 
+                # And a home-manager configuration for them
+                users.${username} = {
+                  imports = [ ./home.nix ];
+
+                  home.username = username;
+                };
+              };
               # Here we can create our user
               uses.users.${username} = {
                 home = "/Users/${username}";
-              };
-
-              # And a home-manager configuration for them
-              home-manager.users.${username} = {
-                imports = [ ./home.nix ];
-
-                home.username = username;
               };
 
               # Here we set our (networking) host name and computer name. They should usually be the same
