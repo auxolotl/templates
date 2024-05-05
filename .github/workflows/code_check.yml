@@ -1,0 +1,26 @@
+name: Code Check
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+jobs:
+  lint:
+    name: Run nixfmt and statix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
+      - name: Install nixfmt and statix
+        run: |
+          nix profile install nixpkgs#nixfmt-rfc-style nixpkgs#statix
+      - name: Run nixfmt
+        run: |
+          nixfmt --check ./**/*.nix
+      - name: Run statix
+        run: |
+          statix check
