@@ -1,5 +1,5 @@
 {
-  description = "Templates for getting started with Aux";
+  description = "Aux template for C project";
 
   inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixos-unstable";
 
@@ -28,19 +28,10 @@
 
       packages = forAllSystems (pkgs: rec {
         default = hello;
-        hello = pkgs.stdenv.mkDerivation rec {
-          name = "hello";
-
-          src = ./.;
-          nativeBuildInputs = [ pkgs.gnumake ];
-
-          enableParallelBuilding = true;
-          V = 1;
-          installPhase = ''
-            install -D ${name} $out/bin/${name} --mode 0755
-          '';
-        };
+        hello = pkgs.callPackage ./default.nix { };
       });
+
+      overlays.default = final: prev: { hello = final.callPackage ./default.nix { }; };
 
       apps = forAllSystems (pkgs: rec {
         default = hello;
