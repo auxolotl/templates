@@ -19,13 +19,12 @@
         ] (system: function nixpkgs.legacyPackages.${system});
     in
     rec {
-      devShells.default = forAllSystems (
-        pkgs:
-        pkgs.mkShell {
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell {
           hardeningDisable = [ "fortify" ];
           inputsFrom = pkgs.lib.attrsets.attrValues packages;
-        }
-      );
+        };
+      });
 
       packages = forAllSystems (pkgs: rec {
         default = hello;
@@ -43,9 +42,12 @@
         };
       });
 
-      apps = rec {
+      apps = forAllSystems (pkgs: rec {
         default = hello;
-        hello = builtins.mapAttrs (name: value: "${value.hello}/bin/hello") packages;
-      };
+        hello = {
+          program = "${packages.${pkgs.system}.hello}/bin/hello";
+          type = "app";
+        };
+      });
     };
 }
