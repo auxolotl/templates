@@ -1,0 +1,4 @@
+columns = 80
+sort = "lines"
+types = ["C", "C Header", "Makefile", "Markdown"]
+treat_doc_strings_as_comments = true

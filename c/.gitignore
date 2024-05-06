@@ -1,0 +1,15 @@
+# binaries
+hello
+
+# build
+*.[aod]
+
+# config
+compile_commands.json
+.pre-commit-config.yaml
+.cache
+
+# nix
+.direnv
+.envrc
+result
