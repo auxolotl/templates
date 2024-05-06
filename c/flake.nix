@@ -3,7 +3,8 @@
 
   inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       forAllSystems =
         function:
@@ -16,12 +17,15 @@
           "mipsel-linux"
           "powerpc64le-linux"
         ] (system: function nixpkgs.legacyPackages.${system});
-    in rec {
-      devShells.default = forAllSystems (pkgs:
+    in
+    rec {
+      devShells.default = forAllSystems (
+        pkgs:
         pkgs.mkShell {
           hardeningDisable = [ "fortify" ];
           inputsFrom = pkgs.lib.attrsets.attrValues packages;
-        });
+        }
+      );
 
       packages = forAllSystems (pkgs: rec {
         default = hello;
@@ -41,8 +45,7 @@
 
       apps = rec {
         default = hello;
-        hello = builtins.mapAttrs
-          (name: value: "${value.hello}/bin/hello") packages;
+        hello = builtins.mapAttrs (name: value: "${value.hello}/bin/hello") packages;
       };
     };
 }
