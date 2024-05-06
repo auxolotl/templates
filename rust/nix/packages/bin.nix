@@ -2,21 +2,23 @@
   lib,
   flake-self,
   cargoMeta,
-  nix-filter,
   rustPlatform,
 }:
-
+let
+  fs = lib.fileset;
+  sourceFiles = fs.unions [
+    (fs.maybeMissing ../../src)
+    (fs.maybeMissing ../../Cargo.toml)
+    (fs.maybeMissing ../../Cargo.lock)
+  ];
+in
 rustPlatform.buildRustPackage {
   inherit (cargoMeta.package) version;
   pname = cargoMeta.package.name;
 
-  src = nix-filter {
+  src = fs.toSource {
     root = ../../.;
-    include = [
-      "src"
-      "Cargo.toml"
-      "Cargo.lock"
-    ];
+    fileset = sourceFiles;
   };
 
   cargoLock.lockFile = ../../Cargo.lock;

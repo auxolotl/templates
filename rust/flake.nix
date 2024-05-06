@@ -11,10 +11,6 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-filter = {
-      url = "github:numtide/nix-filter";
-    };
   };
 
   outputs =
@@ -22,7 +18,6 @@
       self,
       nixpkgs,
       fenix,
-      nix-filter,
       ...
     }@inputs:
     let
@@ -70,7 +65,6 @@
                   pkgsCross.callPackage (./. + "/nix/packages/${packageName}.nix") {
                     inherit cargoMeta;
                     flake-self = self;
-                    nix-filter = import inputs.nix-filter;
                     rustPlatform = pkgsCross.makeRustPlatform {
                       cargo = toolchain;
                       rustc = toolchain;
@@ -104,7 +98,6 @@
           ${packageName} = pkgs.callPackage (./. + "/nix/packages/${packageName}.nix") {
             inherit cargoMeta;
             flake-self = self;
-            nix-filter = import inputs.nix-filter;
             rustPlatform = pkgs.makeRustPlatform {
               cargo = fenix-channel.toolchain;
               rustc = fenix-channel.toolchain;
