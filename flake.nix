@@ -34,6 +34,10 @@
           path = ./direnv;
           description = "An empty devshell with direnv support";
         };
+        rust = {
+          path = ./rust;
+          description = "Rust specific template providing packaging, dev-shell & cross-compilation; based on fenix.";
+        };
       };
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
     };
