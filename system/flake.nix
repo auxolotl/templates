@@ -11,11 +11,13 @@
     in
     {
       nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
-        inherit system;
         modules = [
           ./configuration.nix
 
-          { networking.hostName = hostName; }
+          {
+            networking.hostName = hostName;
+            nixpkgs.hostPlatform = system;
+          }
         ];
 
         specialArgs = {
