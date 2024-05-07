@@ -8,37 +8,20 @@
     let
       forAllSystems =
         function:
-        nixpkgs.lib.genAttrs [
-          "x86_64-linux"
-          "aarch64-linux"
-          "x86_64-darwin"
-          "aarch64-darwin"
-          "i686-linux"
-          "mipsel-linux"
-          "powerpc64le-linux"
-        ] (system: function nixpkgs.legacyPackages.${system});
+        nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
+          system: function nixpkgs.legacyPackages.${system}
+        );
     in
     rec {
       devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShell {
-          hardeningDisable = [ "fortify" ];
-          inputsFrom = pkgs.lib.attrsets.attrValues packages;
-        };
+        default = pkgs.mkShell { inputsFrom = [ packages.${pkgs.system}.hello ]; };
       });
 
       packages = forAllSystems (pkgs: rec {
         default = hello;
-        hello = pkgs.callPackage ./default.nix { };
+        hello = pkgs.callPackage ./hello.nix { };
       });
 
-      overlays.default = final: prev: { hello = final.callPackage ./default.nix { }; };
-
-      apps = forAllSystems (pkgs: rec {
-        default = hello;
-        hello = {
-          program = "${packages.${pkgs.system}.hello}/bin/hello";
-          type = "app";
-        };
-      });
+      overlays.default = final: prev: { hello = prev.callPackage ./default.nix { }; };
     };
 }

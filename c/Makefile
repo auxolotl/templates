@@ -1,21 +1,12 @@
-.POSIX:
-.SUFFIXES: .o
-
 CC ?= gcc
+CFLAGS += -pedantic -Wall -Wextra -O2
+
 OUT := hello
+BINDIR ?= /usr/bin
 
 SRC += main.c
 OBJ := $(SRC:.c=.o)
 
-CFLAGS += @compile_flags.txt
-CFLAGS += -ffunction-sections -fdata-sections
-
-LDFLAGS := -fwhole-program -flto
-LDFLAGS += -Wl,--gc-sections -s
-
-RM ?= rm -f
-
-.DEFAULT_GOAL: all
 .PHONY: all
 all: $(OUT)
 
@@ -33,3 +24,7 @@ fclean: clean
 .PHONY: re
 .NOTPARALLEL: re
 re: fclean all
+
+.PHONY: install
+install:
+	install -D hello ${BINDIR}/hello --mode 0755
