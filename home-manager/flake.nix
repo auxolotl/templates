@@ -2,7 +2,7 @@
   description = "A simple home-manager flake using Aux";
 
   inputs = {
-    nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
