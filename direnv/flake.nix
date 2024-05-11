@@ -1,7 +1,7 @@
 {
   description = "An empty devshell with direnv support";
 
-  inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   outputs =
     { nixpkgs, ... }:

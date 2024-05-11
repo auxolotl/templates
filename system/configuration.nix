@@ -101,17 +101,6 @@
   ];
 
   nix = {
-    registry.nixpkgs = {
-      from = {
-        id = "nixpkgs";
-        type = "indirect";
-      };
-      to = {
-        owner = "auxolotl";
-        repo = "nixpkgs";
-        type = "github";
-      };
-    };
 
     gc.automatic = true;
 

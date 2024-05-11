@@ -4,7 +4,7 @@
   inputs = {
     # nixpkgs is the input that we use for this flake the end section `nixpkgs-unstable` refers to the branch
     # of nixpkgs that we want to use. This can be changed to any branch or commit hash.
-    nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";

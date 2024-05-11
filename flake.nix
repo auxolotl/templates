@@ -1,7 +1,7 @@
 {
   description = "Templates for getting started with Aux";
 
-  inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   outputs =
     { self, nixpkgs }:
