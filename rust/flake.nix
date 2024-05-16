@@ -93,6 +93,29 @@
     {
       formatter = forSystems ({ pkgs, ... }: pkgs.alejandra);
 
+      checks = forSystems (
+        { pkgs, fenixChannel, ... }:
+        {
+          rustfmt =
+            pkgs.runCommand "check-rustfmt"
+              {
+                nativeBuildInputs =
+                  let
+                    fenixRustToolchain = fenixChannel.withComponents [
+                      "cargo"
+                      "rustfmt-preview"
+                    ];
+                  in
+                  [ fenixRustToolchain ];
+              }
+              ''
+                cd ${./.}
+                cargo fmt -- --check
+                touch $out
+              '';
+        }
+      );
+
       packages = forSystems (
         {
           pkgs,
