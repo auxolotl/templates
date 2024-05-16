@@ -35,23 +35,18 @@
               overlays = [ (final: prev: { ${packageName} = self.packages.${system}.${packageName}; }) ];
             };
 
-            fenixPkgsFor = pkgs: fenix.packages.${pkgs.system};
-            fenixChannelFor =
-              pkgs:
-              (fenixPkgsFor pkgs).toolchainOf {
-                channel = "nightly";
-                date =
-                  builtins.replaceStrings [ "nightly-" ] [ "" ]
-                    (builtins.fromTOML (builtins.readFile ./rust-toolchain.toml)).toolchain.channel;
-                sha256 = "sha256-SzEeSoO54GiBQ2kfANPhWrt0EDRxqEvhIbTt2uJt/TQ=";
-              };
+            fenixPkgs = fenix.packages.${pkgs.system};
+            fenixChannel = fenixPkgs.toolchainOf {
+              channel = "nightly";
+              date =
+                builtins.replaceStrings [ "nightly-" ] [ "" ]
+                  (builtins.fromTOML (builtins.readFile ./rust-toolchain.toml)).toolchain.channel;
+              sha256 = "sha256-SzEeSoO54GiBQ2kfANPhWrt0EDRxqEvhIbTt2uJt/TQ=";
+            };
 
             toolchainFor =
               pkgs:
-              let
-                fenix-pkgs = fenixPkgsFor pkgs;
-              in
-              with fenix-pkgs;
+              with fenixPkgs;
               combine [
                 minimal.cargo
                 minimal.rustc
@@ -86,8 +81,8 @@
             inherit
               system
               pkgs
-              fenixPkgsFor
-              fenixChannelFor
+              fenixPkgs
+              fenixChannel
               toolchainFor
               rustPlatformFor
               crossPackageFor
@@ -101,21 +96,18 @@
       packages = forSystems (
         {
           pkgs,
-          fenixChannelFor,
+          fenixChannel,
           system,
           crossPackageFor,
           ...
         }:
-        let
-          fenix-channel = fenixChannelFor pkgs;
-        in
         {
           ${packageName} = pkgs.callPackage (./. + "/nix/packages/${packageName}.nix") {
             inherit cargoMeta;
             flake-self = self;
             rustPlatform = pkgs.makeRustPlatform {
-              cargo = fenix-channel.toolchain;
-              rustc = fenix-channel.toolchain;
+              cargo = fenixChannel.toolchain;
+              rustc = fenixChannel.toolchain;
             };
           };
           default = self.packages.${system}.${packageName};
@@ -128,10 +120,9 @@
       );
 
       devShells = forSystems (
-        { pkgs, fenixChannelFor, ... }:
+        { pkgs, fenixChannel, ... }:
         let
-          fenix-channel = fenixChannelFor pkgs;
-          fenixRustToolchain = fenix-channel.withComponents [
+          fenixRustToolchain = fenixChannel.withComponents [
             "cargo"
             "clippy-preview"
             "rust-src"
