@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-	This is a template repository for getting started with your brand new FreshwaterOS system.
+	This is a template repository for getting started with your brand new Auxolotl system.
 </p>
 
 <p align="center">
