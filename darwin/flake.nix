@@ -23,13 +23,7 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      darwin,
-      home-manager,
-      ...
-    }:
+    inputs@{ darwin, home-manager, ... }:
     # we can use the `let` and `in` syntax to define variables
     # and use them in the rest of the expression
     let
