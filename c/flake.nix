@@ -1,10 +1,10 @@
 {
   description = "Aux template for C project";
 
-  inputs.nixpkgs.url = "github:auxolotl/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
   outputs =
-    { self, nixpkgs }:
+    { nixpkgs, ... }:
     let
       forAllSystems =
         function:
