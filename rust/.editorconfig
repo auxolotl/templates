@@ -1,0 +1,38 @@
+root = true
+
+[*]
+indent_style = tab
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.nix]
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+
+[*.rs,Cargo.toml]
+indent_size = 4
+insert_final_newline = false
+
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+[*.{json,json5,yaml,yml,webmanifest}]
+indent_style = space
+indent_size = 2
+
+[*.toml]
+indent_style = unset
+indent_size = 0
+
+[*.lock]
+indent_style = unset
+insert_final_newline = unset
+
+[Makefile]
+indent_style = tab

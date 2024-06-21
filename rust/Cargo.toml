@@ -1,0 +1,9 @@
+# placeholder for the real Cargo.toml,
+# so that evaluating the flake does not fail due to missing files,
+# before using `cargo init` to create the 'real' files
+[package]
+name = "bin"
+version = "0.1.0"
+
+[profile.release]
+overflow-checks = true

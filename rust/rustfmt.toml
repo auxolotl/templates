@@ -1,0 +1,27 @@
+edition = "2021"
+version = "Two"
+
+newline_style = "Unix"
+format_generated_files = false
+
+hard_tabs = true
+tab_spaces = 4
+
+max_width = 80
+doc_comment_code_block_width = 80
+comment_width = 80
+error_on_line_overflow = true
+error_on_unformatted = true
+
+normalize_comments = true
+normalize_doc_attributes = true
+use_try_shorthand = true
+
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+
+reorder_impl_items = true
+
+match_block_trailing_comma = true
+
+use_field_init_shorthand = true
